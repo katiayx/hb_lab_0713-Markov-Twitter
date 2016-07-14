@@ -3,11 +3,6 @@ import sys
 from random import choice
 import twitter
 
-#>>> print(api.VerifyCredentials())
-#{"id": 16133, "location": "Philadelphia", "name": "bear"}
-# >>> print(api.VerifyCredentials())
-# {"id": 16133, "location": "Philadelphia", "name": "bear"}
-
 
 def open_and_read_file(filenames):
     """Given a list of files, open them, read the text, and return one long
@@ -15,6 +10,7 @@ def open_and_read_file(filenames):
 
     body = ""
 
+    filename = sys.argv[1]
     for filename in filenames:
         text_file = open(filename)
         body = body + text_file.read()
