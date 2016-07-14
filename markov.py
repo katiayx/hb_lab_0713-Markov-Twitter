@@ -1,7 +1,9 @@
 import os
-import sys
+# import sys
 from random import choice
 import twitter
+
+filenames = open("green-eggs.txt") and open("gettysburg.txt")
 
 
 def open_and_read_file(filenames):
@@ -10,7 +12,6 @@ def open_and_read_file(filenames):
 
     body = ""
 
-    filename = sys.argv[1]
     for filename in filenames:
         text_file = open(filename)
         body = body + text_file.read()
@@ -54,7 +55,7 @@ def make_text(chains):
         # it would run for a very long time.
 
         word = choice(chains[key])
-        words.append(word)
+        words = words.append(word)
         if len(words) < 140:
             print words
         else:
@@ -63,6 +64,19 @@ def make_text(chains):
     print words
 #     # # new_string =  " ".join(words) 
 #     # new_words = " ".join(words)
+
+# Get the filenames from the user through a command line prompt, ex:
+# python markov.py green-eggs.txt shakespeare.txt
+# filenames = sys.argv[1]
+
+# Open the files and turn them into one long string
+text = open_and_read_file(filenames)
+
+# Get a Markov chain
+chains = make_chains(text)
+
+# Your task is to write a new function tweet, that will take chains as input
+# tweet(chains)
 
 def tweet(chains):
     # Use Python os.environ to get at environmental variables
@@ -75,18 +89,6 @@ def tweet(chains):
         access_token_secret=os.environ['TWITTER_ACCESS_TOKEN_SECRET'])
     print api.VerifyCredentials()
 
-    status = api.PostUpdate(words)
+    status = api.PostUpdate("example")
     print status.text
 
-# Get the filenames from the user through a command line prompt, ex:
-# python markov.py green-eggs.txt shakespeare.txt
-filenames = sys.argv[1:]
-
-# Open the files and turn them into one long string
-text = open_and_read_file(filenames)
-
-# Get a Markov chain
-chains = make_chains(text)
-
-# Your task is to write a new function tweet, that will take chains as input
-# tweet(chains)
